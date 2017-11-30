@@ -1,5 +1,6 @@
 import bottle
 from beaker.middleware import SessionMiddleware
+from sys import argv
 
 session_opts = {
     'session.type': 'memory',
@@ -30,7 +31,7 @@ def addtocart(item):
 def cart():
     return
 
-bottle.run(app=app, host='localhost', port=5000, debug=True, reloader=True)
+bottle.run(host='0.0.0.0', port=argv[1])
 
 session_opts = {
     'session.type': 'file',
@@ -48,3 +49,5 @@ def test():
   return 'Test counter: %d' % s['test']
 
 bottle.run(app=app)
+
+bottle.run(host='0.0.0.0', port=argv[1])
