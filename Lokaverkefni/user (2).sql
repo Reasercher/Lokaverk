@@ -15,17 +15,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-
---
--- Database: `1010992109_vef2lokaverkefni`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-
 CREATE TABLE IF NOT EXISTS `user` (
   `user` varchar(25) DEFAULT NULL,
   `pass` varchar(12) DEFAULT NULL
@@ -36,10 +25,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`user`, `pass`) VALUES
-('sigurdur', 'admin1234'),
-('admin', 'sigurdur887'),
-('sigurdur12', '1234'),
-('aron', 'gum123');
+('bergthor', '1234'),
+('admin', '1234'),
+('Viddi', '1234'),
+('user', '123');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
