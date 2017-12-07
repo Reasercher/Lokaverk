@@ -1,6 +1,7 @@
-from  bottle import run,route,redirect,request,post,template,app,response,static_file
+import bottle
+from bottle import run,route,redirect,request,post,template,app,response,static_file
 from sys import argv
-import mysql
+import pymysql
 from beaker.middleware import SessionMiddleware
 session_opts = {
     'session.type': 'file',
@@ -10,14 +11,14 @@ session_opts = {
 }
 app = SessionMiddleware(app(), session_opts)
 
-products = [{"pid": 1, "name": "AK-47 Bloodsport FN", "price": 55},
-            {"pid": 2, "name": "USP-S killconfirmed FN", "price": 40},
-            {"pid": 3, "name": "AWP Dragon lore FN", "price": 2000},
-            {"pid": 4, "name": "M4A1- Hyper Beast FN", "price": 61},
-            {"pid": 5, "name": "Desert Eagle Crimson Web FN", "price": 55},
-            {"pid": 6, "name": "FAMAS Roll Cage FN", "price": 7},
-            {"pid": 7, "name": "P250 Supernova FN ", "price": 1},
-            {"pid": 8, "name": "Krambit gamma doppler FN", "price": 360},
+products = [{"pid": 1, "name": "Chips ahoy", "price": 55},
+            {"pid": 2, "name": "milky way", "price": 40},
+            {"pid": 3, "name": "blue cream cookies", "price": 2000},
+            {"pid": 4, "name": "Subway", "price": 61},
+            {"pid": 5, "name": "skinny cream cookies", "price": 55},
+            {"pid": 6, "name": "Oreos", "price": 7},
+            {"pid": 7, "name": "Freshly bar", "price": 1},
+            {"pid": 8, "name": "mini chips ahoy", "price": 360},
 
             ]
 @route("/")
@@ -33,7 +34,7 @@ def nyr():
     password = request.forms.get('pass')
 
     response.set_cookie("account", user, secret='some-secret-key')
-    conn = pymysql.connect(host='tsuts.tskoli.is', port=3306, user='1010992109', passwd='mypassword', db='1010992109_vef2lokaverkefni')
+    conn = pymysql.connect(host='tsuts.tskoli.is', port=3306, user='0511002710', passwd='mypassword', db='Lokaverk' )
 
     cur = conn.cursor()
 
@@ -60,7 +61,7 @@ def doinn():
     user = request.forms.get('user')
     password = request.forms.get('pass')
     response.set_cookie("account", user, secret='some-secret-key')
-    conn = pymysql.connect(host='tsuts.tskoli.is', port=3306, user='1010992109', passwd='mypassword', db='1010992109_vef2lokaverkefni')
+    conn = pymysql.connect(host='tsuts.tskoli.is', port=3306, user='0511002710', passwd='mypassword', db='Lokaverk')
     cur = conn.cursor()
     cur.execute("SELECT count(*) FROM user where user=%s and pass=%s",(user,password))
     result = cur.fetchone()
@@ -127,7 +128,7 @@ def cart():
 def add_to_cart(id):
     if id == 1:
         session = request.environ.get('beaker.session')
-        session["1"] = "AK-47 Bloodsport FN"
+        session["1"] = "Chips ahoy"
         session.save()
         return redirect("/cart")
     if id == 2:
@@ -187,6 +188,7 @@ def send_image(filename):
 def send_image(filename):
     # static/img directory
     return static_file(filename, root='images', mimetype='images/png')
-
-run(app=app,host="0.0.0.0", port=argv[1])
-
+#Heroku
+#bottle.run(host="0.0.0.0", port=argv[1])
+#localhost
+bottle.run(host="localhost", port=8080)
